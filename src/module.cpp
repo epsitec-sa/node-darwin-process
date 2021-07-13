@@ -2,14 +2,16 @@
 
 #include <errno.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
 
-const int get_process_name_by_pid(const int pid, char* nameBuffer, int nameBufferSize)
+int get_process_name_by_pid(const int pid, char* nameBuffer, int nameBufferSize)
 {
     struct kinfo_proc *process = NULL;
     size_t proc_buf_size;
@@ -22,7 +24,7 @@ const int get_process_name_by_pid(const int pid, char* nameBuffer, int nameBuffe
         return errno;
     }
 
-    process = malloc(proc_buf_size);
+    process = (kinfo_proc *)malloc(proc_buf_size);
     st = sysctl(name, 4, process, &proc_buf_size, NULL, 0);
     if (st == -1) {
         return errno;
@@ -67,14 +69,12 @@ napi_value IsProcessRunning(napi_env env, napi_callback_info info)
   status = napi_get_value_int32(env, argv[0], &processPid);
 
   if (status != napi_ok) {
-    printf("---%d---", (int)status);
     napi_throw_error(env, NULL, "Invalid processId was passed as argument");
   }
 
   status = napi_get_value_string_utf8(env, argv[1], processNameA, 1000, &processNameARead);
 
   if (status != napi_ok) {
-    printf("---%d---", (int)status);
     napi_throw_error(env, NULL, "Invalid processName was passed as argument");
   }
 
