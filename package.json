@@ -1,0 +1,31 @@
+{
+  "name": "node-darwin-process",
+  "version": "0.1.1",
+  "description": "https://github.com/epsitec-sa/node-darwin-process",
+  "main": "module.js",
+  "os": [
+    "darwin"
+  ],
+  "devDependencies": {
+    "mocha": "^2.3.3",
+    "node-gyp": "^3.0.3"
+  },
+  "scripts": {
+    "configure": "node-gyp configure",
+    "build": "node-gyp build",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epsitec-sa/node-darwin-process.git"
+  },
+  "engines": {
+    "node": ">=8.4.0"
+  },
+  "author": "Jonny Quarta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/epsitec-sa/node-darwin-process/issues"
+  },
+  "homepage": "https://github.com/epsitec-sa/node-darwin-process#readme"
+}
