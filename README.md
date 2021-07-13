@@ -1,2 +1,2 @@
 # node-darwin-process
-Provides low level win API functions concerning process management
+Provides low level unix API functions concerning process management on macos
