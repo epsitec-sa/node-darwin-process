@@ -1,7 +1,7 @@
 const addon = require("./build/Release/module");
 
 function isProcessRunning(processPid, processName) {
-  const res = addon.is_process_running(processPid, processName);
+  const res = addon.isProcessRunning(processPid, processName);
 
   if (res !== 1 && res !== 0) {
     throw `Could not check for running process: ${res}`;
