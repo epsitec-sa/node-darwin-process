@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "configurations": [
+    {
+      "name": "Run and debug C++ native module with tests",
+      "type": "lldb",
+      "request": "launch",
+      "program": "/usr/local/bin/node",
+      "args": ["./test/index.js"],
+      "cwd": "${workspaceFolder}",
+      "stopOnEntry": false
+    },
+    {
+      "command": "npm run test",
+      "name": "Run and debug JS with tests",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}
