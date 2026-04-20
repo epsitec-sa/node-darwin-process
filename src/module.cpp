@@ -18,7 +18,7 @@ int is_process_running(int pid, const char* expectedName) {
     if (ret > 0) {
         const char* base = strrchr(path, '/');
         base = base ? base + 1 : path;
-        return strcmp(base, expectedName) == 0;
+        return strstr(base, expectedName) != nullptr;
     }
 
     // Step 3: fallback if process exists but we can't verify name
