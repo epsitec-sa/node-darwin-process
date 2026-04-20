@@ -53,8 +53,6 @@ napi_value IsProcessRunning(napi_env env, napi_callback_info info) {
         return nullptr;
     }
 
-    expectedName[sizeof(expectedName) - 1] = '\0';
-
     int result = is_process_running(pid, expectedName);
 
     napi_value napiResult;
