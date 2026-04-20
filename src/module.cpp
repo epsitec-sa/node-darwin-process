@@ -44,7 +44,7 @@ napi_value IsProcessRunning(napi_env env, napi_callback_info info) {
         return nullptr;
     }
 
-    char expectedName[256];
+    char expectedName[PROC_PIDPATHINFO_MAXSIZE];
     size_t nameLen;
 
     status = napi_get_value_string_utf8(env, argv[1], expectedName, sizeof(expectedName), &nameLen);
