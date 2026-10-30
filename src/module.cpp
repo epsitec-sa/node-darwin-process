@@ -6,23 +6,27 @@
 #include <signal.h>
 
 int is_process_running(int pid, const char* expectedName) {
-    // Step 1: check process exist
-    if (kill(pid, 0) != 0) {
-        if (errno == ESRCH) return 0; // Process not running
-    }
+    int res = 0;
+    char procName[1024] = {0};
 
-    // Step 2: try to get and check process name
-    char path[PROC_PIDPATHINFO_MAXSIZE] = {0};
-    int ret = proc_pidpath(pid, path, sizeof(path));
+    if (!pid)
+        return 0;
 
-    if (ret > 0) {
-        const char* base = strrchr(path, '/');
-        base = base ? base + 1 : path;
-        return strstr(base, expectedName) != nullptr;
-    }
+    // If errno == ESRCH, process with pid is not running
+    // if errno is EPERM == 1: Operation not permitted, we know that
+    //   the process exists, then we continue
+    res = kill(pid, 0);
+    if (res && errno != EPERM)
+        return 0;
 
-    // Step 3: fallback if process exists but we can't verify name
-    return 1;
+    // No process with the pid has been found (ret == 0), or an error occured if
+    // it's not 1
+    res = proc_name(pid, procName, sizeof(procName));
+    if (res <= 0)
+        return 0;
+
+    // Process with pid has been found, but what about its name?
+    return strstr(procName, expectedName) ? 1 : 0;
 }
 
 napi_value IsProcessRunning(napi_env env, napi_callback_info info) {
