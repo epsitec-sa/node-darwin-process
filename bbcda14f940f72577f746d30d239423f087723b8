@@ -1,0 +1,12 @@
+[
+  {
+    "SourceBranch": "wip/ms@proc_name",
+    "TargetBranch": "main",
+    "CreateMergeRequest": false,
+    "CreatedAt": "2026-10-30T13:21:15.3767149+01:00",
+    "Author": "Mathieu Schroeter <mathieu@schroetersa.ch>",
+    "TargetSha": "bbcda14f940f72577f746d30d239423f087723b8",
+    "Orphan": false,
+    "BundleName": "node-darwin-process"
+  }
+]
