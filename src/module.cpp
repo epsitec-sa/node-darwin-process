@@ -19,7 +19,7 @@ int is_process_running(int pid, const char* expectedName) {
     if (res && errno != EPERM)
         return 0;
 
-    // No process with the pid has been found (ret == 0), or an error occured if
+    // No process with the pid has been found (ret == 0), or an error occurred if
     // it's not 1
     res = proc_name(pid, procName, sizeof(procName));
     if (res <= 0)
